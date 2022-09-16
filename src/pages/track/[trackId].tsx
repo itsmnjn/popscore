@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import useSwr from 'swr';
@@ -55,43 +56,48 @@ export default function TrackPage() {
   }
 
   return (
-    <main className='flex flex-col items-center justify-between w-full h-full'>
-      <header
-        className='pt-4 text-gray-400 underline cursor-pointer'
-        onClick={() => {
-          router.back();
-        }}
-      >
-        go back
-      </header>
+    <>
+      <Head>
+        <title>popscore | track</title>
+      </Head>
+      <main className='flex flex-col items-center justify-between w-full h-full'>
+        <header
+          className='pt-4 text-gray-400 underline cursor-pointer'
+          onClick={() => {
+            router.back();
+          }}
+        >
+          go back
+        </header>
 
-      <section className='flex flex-col items-center w-full max-w-md'>
-        <div className='relative w-32 mb-3 aspect-square'>
-          <Image
-            src={track.coverArt}
-            layout='fill'
-            objectFit='contain'
-            alt='cover art'
-          />
-        </div>
+        <section className='flex flex-col items-center w-full max-w-md'>
+          <div className='relative w-32 mb-3 aspect-square'>
+            <Image
+              src={track.coverArt}
+              layout='fill'
+              objectFit='contain'
+              alt='cover art'
+            />
+          </div>
 
-        <div>
-          <p>
-            <span className='font-medium'>title:</span> {track.title}
+          <div>
+            <p>
+              <span className='font-medium'>title:</span> {track.title}
+            </p>
+            <p>
+              <span className='font-medium'>score:</span> {track.score}
+            </p>
+          </div>
+        </section>
+
+        <footer className='pb-4'>
+          <p className='text-blue-400 underline cursor-pointer'>
+            <a href={track.url} target='_blank' rel='noreferrer'>
+              go to song
+            </a>
           </p>
-          <p>
-            <span className='font-medium'>score:</span> {track.score}
-          </p>
-        </div>
-      </section>
-
-      <footer className='pb-4'>
-        <p className='text-blue-400 underline cursor-pointer'>
-          <a href={track.url} target='_blank' rel='noreferrer'>
-            go to song
-          </a>
-        </p>
-      </footer>
-    </main>
+        </footer>
+      </main>
+    </>
   );
 }
